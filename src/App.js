@@ -1,7 +1,8 @@
 import React from 'react';
 import style from './style.css';
 import { useDispatch, useSelector } from 'react-redux';
-import { decrementCreator, incrementCreator } from './store/countReducer';
+import { asyncDecrementCreator, asyncIncrementCreator, decrementCreator, incrementCreator } from './store/countReducer';
+import { fetchUsers } from './store/userReducer';
 
 const App = () => {
   const count = useSelector(state => state.countReducer.count)
@@ -9,11 +10,11 @@ const App = () => {
   const dispatch = useDispatch()
   return (
     <div className="app">
-      <div className='count'></div>
+      <div className='count'>{count}</div>
       <div className='btns'>
-        <button className='btn' onClick={() => dispatch(incrementCreator())}>Increment++</button>
-        <button className='btn' onClick={() => dispatch(decrementCreator())}>Decrement--</button>
-        <button className='btn'>Get Users</button>
+        <button className='btn' onClick={() => dispatch(asyncIncrementCreator())}>Increment++</button>
+        <button className='btn' onClick={() => dispatch(asyncDecrementCreator())}>Decrement--</button>
+        <button className='btn' onClick={() => dispatch(fetchUsers())}>Get Users</button>
       </div>
       <div className='users'>
         {users.map(user => 
